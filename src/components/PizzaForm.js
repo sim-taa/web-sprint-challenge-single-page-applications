@@ -23,6 +23,10 @@ const PizzaForm = () => {
             Enter your name
             <input type="text" name="name" id= "name-input"></input>;
         </label>
+        <label>
+            Enter your special instructions
+            <input type="text" name="instructions" id= "special-text"></input>
+        </label>
     </form>
     </article>)
 }
