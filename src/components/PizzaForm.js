@@ -5,8 +5,8 @@ const PizzaForm = () => {
     const { type } = useParams()
 
     return(<article>
-    <h1>type {type} order form</h1>
+    <h1>Type {type} order form.</h1>
     </article>)
 }
 
-export default PizzaForm
+export default PizzaForm;
