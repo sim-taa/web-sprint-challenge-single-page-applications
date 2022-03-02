@@ -6,6 +6,9 @@ const PizzaForm = () => {
 
     return(<article>
     <h1>Type {type} order form.</h1>
+    <form id="pizza-form">
+
+    </form>
     </article>)
 }
 
