@@ -7,7 +7,7 @@ const App = () => {
     <div className="App">
     <header>
       <Link to="/">Home</Link>
-      <Link to="/PizzaForm/">Type</Link>
+      <Link to="/pizzaform/" id="pizza-form">Type</Link>
       </header>
       <Switch>
         <Route exact path="/">
