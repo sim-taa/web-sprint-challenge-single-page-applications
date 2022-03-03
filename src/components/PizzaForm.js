@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import schema from '../validation/formSchema';
 import * as yup from 'yup';
+import axios from 'axios';
+import { boolean } from "yup";
 export default function PizzaForm(props) {
     // const {
     // /  values,
@@ -57,6 +59,21 @@ const formChange = (e) => {
 
 const submitForm = (e) => {
     e.preventDefault()
+    const orderData = {
+        name: form.name,
+        size: form.size,
+        olives: form.olives,
+        mushrooms: form.mushrooms,
+        onions: form.onions,
+        pineapple: form.pineapple,
+        instructions: form.instructions
+    }
+    console.log(orderData)
+    axios.post('https://reqres.in/api/orders', orderData)
+      .then(res => {
+        console.log("order posted")
+      }).catch(err => console.error(err))
+
 
 }
     return(<article>
@@ -70,13 +87,13 @@ const submitForm = (e) => {
 
         <label>
             Enter your special instructions
-            <input type="text" name="instructions" id= "special-text"></input>
+            <input onChange={formChange} type="text" name="instructions" id= "special-text"></input>
         </label>
         <label>Select a pizza size</label>
-            <select 
+            <select  onChange={formChange}
             id="size-dropdown"
             name="size"
-            value=''
+            value={form.size}
             >
             <option value=''>- Select an option -</option>
             <option value='small'>small</option>
@@ -84,11 +101,11 @@ const submitForm = (e) => {
             <option value='large'>large</option>
             </select>
             <h4>Toppings</h4>
-            <label><input type="checkbox" value="olives"></input></label>
-            <label><input type="checkbox" value="mushrooms"></input></label>
-            <label><input type="checkbox" value="onions"></input></label>
-            <label><input type="checkbox" value="pinapple"></input></label>
-            <button>Submit!</button>
+            <label><input onChange={formChange} type="checkbox" name="olives"></input></label>
+            <label><input onChange={formChange} type="checkbox" name="mushrooms"></input></label>
+            <label><input onChange={formChange} type="checkbox" name="onions"></input></label>
+            <label><input onChange={formChange} type="checkbox" name="pineapple"></input></label>
+            <button type="submit" id="order-button">Submit!</button>
 
     </form>
     </article>

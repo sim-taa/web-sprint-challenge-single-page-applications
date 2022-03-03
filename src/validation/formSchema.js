@@ -11,7 +11,7 @@ const formSchema = yup.object().shape({
     .oneOf(['small', 'medium', 'large'], 'pick a size'),
   olives: yup.boolean(),
   mushrooms: yup.boolean(),
-  olives: yup.boolean(),
+  onions: yup.boolean(),
   pinapple: yup.boolean(),
   instructions: yup
   .string()
