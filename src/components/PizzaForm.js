@@ -15,11 +15,21 @@ export default function PizzaForm(props) {
   console.log(props)
     const onSubmit = evt => {
       evt.preventDefault()
-      submit()
+      //submit()
     }
 
 // const PizzaForm = () => {
      const { type } = useParams()
+
+     const [errors, setErrors] = useState({
+        name: "",
+      size: "",
+      olives: "",
+      mushrooms: "",
+      onions: "",
+      pinapple: "",
+      instructions: ""
+    })
 
     const [form, setForm] = useState({
         name: '',
@@ -30,14 +40,34 @@ export default function PizzaForm(props) {
         pineapple: false,
         instructions: '',
     })
+const formChange = (e) => {
+    console.log(e.target.name, e.target.value);
+    if (form.name.length<=2) {
+        setErrors({
+            ...errors, name: "name must be at least 2 characters"
+          });
+       console.log("NAME TOO SHORT")
+    } else {
+        setErrors({
+            ...errors, name: ""
+          });
+    }
+    setForm({...form, [e.target.name]:e.target.value})
+}
 
+const submitForm = (e) => {
+    e.preventDefault()
+
+}
     return(<article>
     <h1>Type {type} order form.</h1>
-    <form id="pizza-form">
+    <form onSubmit={submitForm} id="pizza-form">
         <label>
             Enter your name
-            <input type="text" name="name" id="name-input"></input>;
+            <input onChange={formChange} type="text" name="name" id="name-input"></input>;
         </label>
+        { <p className="error">{errors.name}</p> }
+
         <label>
             Enter your special instructions
             <input type="text" name="instructions" id= "special-text"></input>
@@ -58,7 +88,40 @@ export default function PizzaForm(props) {
             <label><input type="checkbox" value="mushrooms"></input></label>
             <label><input type="checkbox" value="onions"></input></label>
             <label><input type="checkbox" value="pinapple"></input></label>
-            
+            <button>Submit!</button>
+
     </form>
     </article>
+
+
+// const validate = (name, value) => {
+//     yup.reach(schema, name)
+//       .validate(value)
+//       .then(() => setFormErrors({ ...formErrors, [name]: '' }))
+//       .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0] }))
+//   }
+
+  
+//     // 🔥 STEP 10- RUN VALIDATION WITH YUP
+//     const inputChange = (name, value) => {
+//         validate(name, value);
+//         setFormValues({
+//         ...formValues,
+//         [name]: value
+//     })
+//   }
+
+//   const formSubmit = () => {
+//     const newPizza = {
+//       name: formValues.name.trim(),
+//       size: formValues.email.trim(),
+//       olives: formValues.role.trim(),
+//       mushrooms: formValues.civil.trim(),
+//       onions: formValues.civil.trim(),
+//       pineapple: formValues.civil.trim(),
+//       // 🔥 STEP 7- WHAT ABOUT HOBBIES?
+//       hobbies: ['hiking', 'reading', 'coding'].filter(hobby => formValues[hobby])
+//     }
+
+
     )}
